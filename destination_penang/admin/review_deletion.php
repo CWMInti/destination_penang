@@ -14,8 +14,8 @@
 	}
 	
     if ($review_id == '') {
-        echo "<h1><center>Your review is empty....</center></h1>";
-        echo "<h2><center><a href='admin_page.php'>Please enter the id for review deletion</a><center></h2>";
+        echo "<h1><center>No ID was entered</center></h1>";
+        echo "<h2><center><a href='admin_page.php'>Please enter the ID for review deletion</a><center></h2>";
     } else if (!$review_id == '') {
         $sql = "DELETE FROM places_reviews WHERE id=$review_id";
         
