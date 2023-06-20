@@ -14,9 +14,11 @@
     $admin_password = $_POST['admin_password'];  
 	$cookie_name = "adminlogin";
       
-	$sql = "SELECT * FROM admin_accounts where admin_username = '$admin_username' and admin_password = '$admin_password'";  
-	$result = mysqli_query($conn, $sql);  
-	$row = mysqli_fetch_array($result, MYSQLI_ASSOC);  
+	$stmt = $conn->prepare("SELECT * FROM admin_accounts where admin_username = ? and admin_password = ?");
+	$stmt->bind_param ("ss", $admin_username, $admin_password);
+	$stmt->execute ();
+	$result = $stmt->get_result ();
+	$row = $result->fetch_array ();
 	$count = mysqli_num_rows($result);
 	  
 	if($count == 1){  
@@ -27,5 +29,8 @@
 	else{  
 		echo "<h1><center> Login failed. Invalid username or password. </center></h1>";
 		echo "<h2><center><a href='admin_login.php'>Back to Admin Login</a><center></h2>";
-	}     
+	}
+
+	$stmt->close();
+	$conn->close();
 ?>  
