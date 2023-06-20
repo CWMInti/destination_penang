@@ -29,18 +29,23 @@
 					echo "<h1><center>Your review is empty....</center></h1>";
 					echo "<h2><center><a href='../places-reviews.php'>Check your review again</a><center></h2>";
 				} else if (!$form_placereview == '') {
-					$sql = "INSERT INTO places_reviews (nickname, place_name, place_address, place_review) VALUES ('$form_nickname', '$form_placename', '$form_placeaddress', '$form_placereview')";
-					
-					if ($conn->query($sql) === TRUE) {
-						echo "<h1><center>Thanks for your Review!</center></h1>";
-						echo "<h2><center>Your review:</center></h2>";
-						echo "<h3><center>Nickname: $form_nickname</center></h3>";
-						echo "<h3><center>Place: $form_placename</center></h3>";
-						echo "<h3><center>Address: $form_placeaddress</center></h3>";
-						echo "<h3><center>$form_placereview</center></h3>";
-						echo "<h2><center><a href='../places-reviews.php'>Back to Places Reviews</a><center></h2>";
+					$stmt = $conn->prepare("INSERT INTO places_reviews (nickname, place_name, place_address, place_review) VALUES (?, ?, ?, ?)");
+					$stmt->bind_param ("ssss", $form_nickname, $form_placename, $form_placeaddress, $form_placereview);
+
+					if ($stmt->execute()) {
+						// Display a success message and the review details
+						?>
+						<h1><center>Thanks for your Review!</center></h1>
+						<h2><center>Your review:</center></h2>
+						<h3><center>Nickname: <?php echo $form_nickname; ?></center></h3>
+						<h3><center>Place: <?php echo $form_placename; ?></center></h3>
+						<h3><center>Address: <?php echo $form_placeaddress; ?></center></h3>
+						<h3><center><?php echo $form_placereview; ?></center></h3>
+						<h2><center><a href='../places-reviews.php'>Back to Places Reviews</a><center></h2>
+						<?php
 					} else {
-						echo "Error: " . $sql . "<br>" . $conn->error;
+						// Display an error message
+						echo "Error: " . $stmt->error;
 					}
 				}
 ?>  
