@@ -14,16 +14,22 @@
 	}
 	
     if ($review_id == '') {
-        echo "<h1><center>No ID was entered</center></h1>";
-        echo "<h2><center><a href='admin_page.php'>Please enter the ID for review deletion</a><center></h2>";
+        ?>
+        <h1><center>No ID was entered</center></h1>
+        <h2><center><a href='admin_page.php'>Please enter the ID for review deletion</a><center></h2>
+        <?php
     } else if (!$review_id == '') {
-        $sql = "DELETE FROM places_reviews WHERE id=$review_id";
+        $sql = "";
+        $stmt = $conn->prepare("DELETE FROM places_reviews WHERE id = ?");
+		$stmt->bind_param ("s", $review_id);
         
-        if ($conn->query($sql) === TRUE) {
-            echo "<h3><center>Review ID: $review_id has been deleted successfully</center></h3>";
-            echo "<h2><center><a href='admin_page.php'>Back to Reviews Management</a><center></h2>";
+        if ($stmt->execute()) {
+            ?>
+            <h3><center>Review ID: <?php echo $review_id; ?> has been deleted</center></h3>
+            <h2><center><a href='admin_page.php'>Back to Reviews Management</a><center></h2>
+            <?php
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "Error: " . $stmt->error;
         }
     }
 ?>  
