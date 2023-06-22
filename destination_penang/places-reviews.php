@@ -178,7 +178,7 @@ $conn->close();
 
             if ($result->num_rows > 0) {
               while($row = $result->fetch_assoc()) {
-                echo "Nickname: " . $row["nickname"]. "<br>Place:<br>" . $row["place_name"]. "<br>Address:<br>" . $row["place_address"]. "<br>Review:<br>" . $row["place_review"]. "<br>";
+                echo "Nickname: " . $row["nickname"]. "<br>Place:<br>" . $row["place_name"]. "<br>Address:<br>" . $row["place_address"]. "<br>Rating:<br>" . $row["place_rating"]. "<br>Review:<br>" . $row["place_review"]. "<br>";
                 echo "<p>-----------------</p>";
               }
             } else {
@@ -212,6 +212,14 @@ $conn->close();
                 placeholder="Place address"
                 class="places-reviews-textinput1 input"
               />
+              <br/><select name="form_placerating" id="form_placerating">
+                <option value="No rating">Select a rating</option>
+                <option value="1 out of 5">1 out of 5</option>
+                <option value="2 out of 5">2 out of 5</option>
+                <option value="3 out of 5">3 out of 5</option>
+                <option value="4 out of 5">4 out of 5</option>
+                <option value="5 out of 5">5 out of 5</option>
+              </select><br/>
               <textarea
                 id="form_placereview"
                 name="form_placereview"
