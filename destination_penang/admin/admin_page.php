@@ -32,7 +32,7 @@
 
                         if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
-                            echo "ID: " . $row["id"]. "<br>Nickname: " . $row["nickname"]. "<br>Place:<br>" . $row["place_name"]. "<br>Address:<br>" . $row["place_address"]. "<br>Review:<br>" . $row["place_review"]. "<br>";
+                            echo "ID: " . $row["id"]. "<br>Nickname: " . $row["nickname"]. "<br>Place:<br>" . $row["place_name"]. "<br>Address:<br>" . $row["place_address"]. "<br>Rating:<br>" . $row["place_rating"].  "<br>Review:<br>" . $row["place_review"]. "<br>";
                             echo "<p>-----------------</p>";
                             }
                         } else {
