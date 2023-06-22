@@ -26,7 +26,7 @@
 		} else if ($form_placeaddress == '') {
 			echo "<h1><center>Please enter the place address.</center></h1>";
 			echo "<h2><center><a href='../places-reviews.php'>Check your review again</a><center></h2>";
-			} else if ($form_placerating == '0 out of 5') {
+			} else if ($form_placerating == 'No rating') {
 				echo "<h1><center>Please select a rating</center></h1>";
 				echo "<h2><center><a href='../places-reviews.php'>Check your review again</a><center></h2>";
 				} else if ($form_placereview == '') {
